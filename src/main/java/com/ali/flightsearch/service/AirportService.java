@@ -2,7 +2,6 @@ package com.ali.flightsearch.service;
 
 import com.ali.flightsearch.model.Airport;
 import com.ali.flightsearch.repository.AirportRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class AirportService {
         return repository.findAll();
     }
 
-    public Optional<Airport> getAirportById(ObjectId id) {
+    public Optional<Airport> getAirportById(String id) {
         return repository.findById(id);
     }
 
@@ -35,7 +34,7 @@ public class AirportService {
         return repository.save(airport);
     }
 
-    public void deleteAirportById(ObjectId id) {
+    public void deleteAirportById(String id) {
         repository.deleteById(id);
     }
 }

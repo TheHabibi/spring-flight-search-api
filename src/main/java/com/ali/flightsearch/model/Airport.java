@@ -1,18 +1,14 @@
 package com.ali.flightsearch.model;
 
-import lombok.*;
-import org.bson.types.ObjectId;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "airports")
 @Data
-@Getter
-@Setter
+@Document(collection = "airports")
 public class Airport {
+
     @Id
-    private ObjectId id; // Use ObjectId or a compatible type
+    private String id;
     private String city;
 }
-
-
