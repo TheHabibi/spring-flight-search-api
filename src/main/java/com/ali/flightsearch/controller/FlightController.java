@@ -55,4 +55,10 @@ public class FlightController {
         flightService.deleteFlightById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight searchRequest) {
+        List<Flight> foundFlights = flightService.searchFlights(searchRequest);
+        return new ResponseEntity<>(foundFlights, HttpStatus.OK);
+    }
 }
