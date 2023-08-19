@@ -59,6 +59,13 @@ public class FlightController {
     @PostMapping("/search")
     public ResponseEntity<List<Flight>> searchFlights(@RequestBody Flight searchRequest) {
         List<Flight> foundFlights = flightService.searchFlights(searchRequest);
+
+        if (searchRequest.getReturnDate() == null) {
+            for (Flight flight : foundFlights) {
+                flight.setReturnDate(null);
+            }
+        }
         return new ResponseEntity<>(foundFlights, HttpStatus.OK);
     }
+
 }

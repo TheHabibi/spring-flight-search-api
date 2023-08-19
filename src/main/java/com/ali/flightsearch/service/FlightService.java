@@ -41,7 +41,7 @@ public class FlightService {
 
     public List<Flight> searchFlights(Flight searchCriteria) {
         List<Flight> allFlights = repository.findAll();
-        
+
         List<Flight> matchingFlights = allFlights.stream()
                 .filter(flight -> matchesCriteria(flight, searchCriteria))
                 .collect(Collectors.toList());
@@ -50,20 +50,20 @@ public class FlightService {
     }
 
     private boolean matchesCriteria(Flight flight, Flight searchCriteria) {
-
         boolean departureAirportMatches = flight.getDepartureAirport().equalsIgnoreCase(searchCriteria.getDepartureAirport());
         boolean arrivalAirportMatches = flight.getArrivalAirport().equalsIgnoreCase(searchCriteria.getArrivalAirport());
 
-        String flightDepartureDate = flight.getDepartureTime().substring(0, 10);
-        String flightArrivalDate = flight.getArrivalTime().substring(0, 10);
-        String searchDepartureDate = searchCriteria.getDepartureTime().substring(0, 10);
-        String searchArrivalDate = searchCriteria.getArrivalTime().substring(0, 10);
+        String flightDepartureDate = flight.getDepartureDate().substring(0, 10);
+        String searchDepartureDate = searchCriteria.getDepartureDate().substring(0, 10);
 
         boolean departureDateMatches = flightDepartureDate.equals(searchDepartureDate);
-        boolean arrivalDateMatches = flightArrivalDate.equals(searchArrivalDate);
 
-        if (searchCriteria.getArrivalTime() != null) {
-            return departureAirportMatches && arrivalAirportMatches && departureDateMatches && arrivalDateMatches;
+        if (searchCriteria.getReturnDate() != null) {
+            String flightReturnDate = flight.getReturnDate().substring(0, 10);
+            String searchReturnDate = searchCriteria.getReturnDate().substring(0, 10);
+            boolean returnDateMatches = flightReturnDate.equals(searchReturnDate);
+
+            return departureAirportMatches && arrivalAirportMatches && departureDateMatches && returnDateMatches;
         } else {
             return departureAirportMatches && arrivalAirportMatches && departureDateMatches;
         }

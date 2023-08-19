@@ -12,7 +12,7 @@ public class Flight {
     private String id;
     private String departureAirport;
     private String arrivalAirport;
-    private String departureTime;
-    private String arrivalTime;
+    private String departureDate;
+    private String returnDate;
     private Double price;
 }
